@@ -9,5 +9,5 @@ public class Grupo {
 	String nombre;
 	String pais;
 	Map<LocalDate, Cd> discografia = new TreeMap<>();
-	
+
 }
