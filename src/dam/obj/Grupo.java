@@ -6,8 +6,18 @@ import java.util.TreeMap;
 
 public class Grupo {
 
-	String nombre;
-	String pais;
-	Map<LocalDate, Cd> discografia = new TreeMap<>();
+	private String nombre;
+	private String pais;
+	private Map<LocalDate, Cd> discografia = new TreeMap<>();
+	
+	Grupo(){
+		
+	}
+	
+	Grupo(String nombre, String pais, Map discografia){
+		this.nombre = nombre;
+		this.pais = pais;
+		this.discografia = discografia;
+	}
 
 }
