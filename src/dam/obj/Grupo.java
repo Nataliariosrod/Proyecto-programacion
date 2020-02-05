@@ -120,6 +120,16 @@ public class Grupo {
 			System.out.println("El nombre introducido no está en la lista.");
 		}
 	}
+	
+	public boolean recorrerDiscografia(String nombre) {
+		boolean b = false;
+		for(Map.Entry<LocalDate, String> i : discografia.entrySet()) {
+			if (i.getValue().equalsIgnoreCase(nombre)) {
+				b = true;
+			}
+		}
+		return b;
+	}
 }
 	
 
