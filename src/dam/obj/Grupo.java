@@ -1,6 +1,9 @@
 package dam.obj;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -143,6 +146,22 @@ public class Grupo {
 		for(Map.Entry<LocalDate, String> i : discografia.entrySet()) {
 			System.out.println(i.getValue()+" ("+i.getKey().getDayOfMonth()+"/"+i.getKey().getMonthValue()+"/"+i.getKey().getYear()+")");
 		}
+	}
+	
+	public String getDatos() {
+		return "'"+nombre+"' ("+pais+")";
+	}
+	
+	public void mostrarDiscografiaAlfabetica() {
+		List<String> alfabetic = new ArrayList<>(discografia.values());
+		Collections.sort(alfabetic);
+		for(String nombre : alfabetic) {
+			System.out.println(nombre);
+		}
+	}
+	
+	public boolean discografiaVacia() {
+		return (discografia.size() == 0);
 	}
 }
 	
