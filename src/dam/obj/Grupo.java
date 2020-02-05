@@ -104,6 +104,22 @@ public class Grupo {
 			discografia.put(nuevaFecha, tempVal);
 		}
 	}
+	
+	public void eliminarCd(String nombre) {
+		LocalDate tempKey = null;
+		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
+			if (i.getValue().contentEquals(nombre)) {
+				tempKey = i.getKey();
+			}
+		}
+		if (tempKey != null) {
+			discografia.remove(tempKey);
+			System.out.println("El CD "+nombre+" ha sido eliminado.");
+		}
+		else {
+			System.out.println("El nombre introducido no está en la lista.");
+		}
+	}
 }
 	
 
