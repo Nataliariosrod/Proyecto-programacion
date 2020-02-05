@@ -48,9 +48,9 @@ public class Grupo {
 		LocalDate fecha = cd.getFecha();
 		String nombre = cd.getNombre();
 		LocalDate temkey = null;
-		for(Map.Entry<LocalDate, String> i : discografia.entrySet()) {
-			if (i.getKey().equals(fecha)) {
-				temkey = i.getKey();
+		for(LocalDate i : discografia.keySet()) {
+			if (i.equals(fecha)) {
+				temkey = i;
 			}
 		}
 		if (temkey != null) {	
@@ -74,13 +74,22 @@ public class Grupo {
 					System.out.println("Error. Intriduzca una opción correcta");
 					break;
 				}	
-			
 			}
-		
 		}else{
 			discografia.put(fecha, nombre);
 		}
-	}		
+	}
+	
+	public LocalDate getFechaCd(String nombre) {
+		LocalDate tempKey = null;
+		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
+			if (i.getValue().equalsIgnoreCase(nombre)) {
+				tempKey = i.getKey();
+			}
+		}
+		return tempKey;
+	}
+	
 }
 	
 
