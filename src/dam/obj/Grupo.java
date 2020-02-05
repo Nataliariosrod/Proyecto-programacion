@@ -90,6 +90,20 @@ public class Grupo {
 		return tempKey;
 	}
 	
+	public void modificarFechaCd(LocalDate fecha, LocalDate nuevaFecha) {
+		String tempVal = null;
+		LocalDate tempKey = null;
+		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
+			if (i.getKey().equals(fecha)) {
+				tempVal = i.getValue();
+				tempKey = i.getKey();
+			}
+		}
+		if (tempKey != null) {
+			discografia.remove(tempKey);
+			discografia.put(nuevaFecha, tempVal);
+		}
+	}
 }
 	
 
