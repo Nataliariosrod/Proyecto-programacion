@@ -130,6 +130,20 @@ public class Grupo {
 		}
 		return b;
 	}
+	
+	public void modificarNombreCd(String nombre, String nuevoNombre) {
+		for(Map.Entry<LocalDate, String> i : discografia.entrySet()) {
+			if (i.getValue().equalsIgnoreCase(nombre)) {
+				i.setValue(nuevoNombre);
+			}
+		}
+	}
+	
+	public void mostrarDiscografia() {
+		for(Map.Entry<LocalDate, String> i : discografia.entrySet()) {
+			System.out.println(i.getValue()+" ("+i.getKey().getDayOfMonth()+"/"+i.getKey().getMonthValue()+"/"+i.getKey().getYear()+")");
+		}
+	}
 }
 	
 
