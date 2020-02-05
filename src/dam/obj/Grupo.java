@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.util.Map;
 import java.util.TreeMap;
 
-import ejercicio_3.ControlExcepciones;
 
-public class Grupo extends {
+
+public class Grupo {
 
 	private String nombre;
 	private String pais;
@@ -52,15 +52,16 @@ public class Grupo extends {
 			if (i.getKey().equals(fecha)) {
 				temkey = i.getKey();
 			}
-		}if (temkey != null) {
-			
-		int key;
-		System.out.println("Ya existe un CD con esa misma fecha de lanzamiento /n¿Desea Sobreescribirlo?");
+		}
+		if (temkey != null) {	
+			int key = 0;
+			System.out.println("Ya existe un CD con esa misma fecha de lanzamiento /n¿Desea Sobreescribirlo?");
 			while (key == 0) {
 				System.out.println("¿Que deseea hacer?/n1.Sobreescribirlo/n2.Cancelar");
 				key = ex.controlInt();
 				switch (key) {
 				case 1:
+					discografia.remove(temkey);
 					discografia.put(fecha ,nombre);
 					System.out.println("El CD se ha sobreescrito con éxito");
 					break;
@@ -73,7 +74,9 @@ public class Grupo extends {
 					System.out.println("Error. Intriduzca una opción correcta");
 					break;
 				}	
+			
 			}
+		
 		}else{
 			discografia.put(fecha, nombre);
 		}
