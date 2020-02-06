@@ -3,7 +3,9 @@
  * 
  * @author Miguel Alcantara
  */
-package ejercicio_3;
+
+package dam.obj;
+
 import java.util.Scanner;
 import java.time.LocalDate;
 
@@ -78,7 +80,7 @@ public class ControlExcepciones {
 			int dia = controlInt();
 			System.out.println("Mes:");
 			int mes = controlInt();
-			System.out.println("Año:");
+			System.out.println("Aï¿½o:");
 			int anio = controlInt();
 			try {
 				date = LocalDate.of(anio, mes, dia);
