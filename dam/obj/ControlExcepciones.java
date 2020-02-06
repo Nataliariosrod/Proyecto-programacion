@@ -3,7 +3,7 @@
  * 
  * @author Miguel Alcantara
  */
-package obj;
+package dam.obj;
 
 import java.util.Scanner;
 import java.time.LocalDate;
