@@ -20,6 +20,12 @@ public class Grupo {
 		
 	}
 	
+	/**
+	 * Constructor Sobrecargado
+	 * @param nombre
+	 * @param pais
+	 * @param discografia
+	 */
 	Grupo(String nombre, String pais, Map discografia){
 		this.nombre = nombre;
 		this.pais = pais;
