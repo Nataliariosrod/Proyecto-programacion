@@ -1,4 +1,4 @@
-package dam.obj;
+package obj;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -510,8 +510,10 @@ public class Ejecucion {
 	}
 
 	static void modificarFechaCd(String nombre) {
+		
 		System.out.println("\nIntroduce la fecha nueva del CD:");
 		LocalDate nuevaFecha = ex.controlDate();
+		if (!managersList.stream().anyMatch(r -> r.getGrupo().getFechaCd(nombre).equals(nuevaFecha))) {
 		/*
 		 * for (Representante representante : managersList) { if
 		 * (representante.getGrupo().recorrerDiscografia(nombre)) {
@@ -520,6 +522,9 @@ public class Ejecucion {
 		 */
 		managersList.stream().filter(r -> r.getGrupo().recorrerDiscografia(nombre))
 				.forEach(r -> r.getGrupo().modificarFechaCd(r.getGrupo().getFechaCd(nombre), nuevaFecha));
+		} else {
+			System.out.println("Ya existe un CD en la lista con esa fecha.");
+		}
 	}
 
 	static void menuModificarCD() {
