@@ -3,7 +3,7 @@
  * 
  * @author Miguel Alcantara
  */
-package ejercicio_3;
+package obj;
 
 import java.util.Scanner;
 import java.time.LocalDate;
