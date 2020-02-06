@@ -21,7 +21,7 @@ public class Grupo {
 	}
 	
 	/**
-	 * Constructor Sobrecargado
+	 * Constructor Grupo Sobrecargado
 	 * @param nombre
 	 * @param pais
 	 * @param discografia
@@ -53,6 +53,10 @@ public class Grupo {
 		
 	}
 	
+	/**
+	 * Metodo para introducir un nuevo CD
+	 * @param cd
+	 */
 	public void introducirCD(Cd cd) {
 		LocalDate fecha = cd.getFecha();
 		String nombre = cd.getNombre();
@@ -89,6 +93,11 @@ public class Grupo {
 		}
 	}
 	
+	/**
+	 * Metodo para Obtener la fecha de salida de un CD
+	 * @param nombre
+	 * @return
+	 */
 	public LocalDate getFechaCd(String nombre) {
 		LocalDate tempKey = null;
 		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
@@ -99,6 +108,11 @@ public class Grupo {
 		return tempKey;
 	}
 	
+	/**
+	 * Motodo para modificar la fecha de un CD
+	 * @param fecha
+	 * @param nuevaFecha
+	 */
 	public void modificarFechaCd(LocalDate fecha, LocalDate nuevaFecha) {
 		String tempVal = null;
 		LocalDate tempKey = null;
@@ -114,6 +128,10 @@ public class Grupo {
 		}
 	}
 	
+	/**
+	 * Metodo para eliminar un CD
+	 * @param nombre
+	 */
 	public void eliminarCd(String nombre) {
 		LocalDate tempKey = null;
 		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
@@ -130,6 +148,11 @@ public class Grupo {
 		}
 	}
 	
+	/**
+	 * Metodo para recorrer la discografia.
+	 * @param nombre
+	 * @return
+	 */
 	public boolean recorrerDiscografia(String nombre) {
 		boolean b = false;
 		for(Map.Entry<LocalDate, String> i : discografia.entrySet()) {
@@ -140,6 +163,11 @@ public class Grupo {
 		return b;
 	}
 	
+	/**
+	 * Metodo para modificar el nommbre de un CD
+	 * @param nombre
+	 * @param nuevoNombre
+	 */
 	public void modificarNombreCd(String nombre, String nuevoNombre) {
 		for(Map.Entry<LocalDate, String> i : discografia.entrySet()) {
 			if (i.getValue().equalsIgnoreCase(nombre)) {
@@ -148,16 +176,26 @@ public class Grupo {
 		}
 	}
 	
+	/**
+	 * Metodo para mostrar la discografia.
+	 */
 	public void mostrarDiscografia() {
 		for(Map.Entry<LocalDate, String> i : discografia.entrySet()) {
 			System.out.println(i.getValue()+" ("+i.getKey().getDayOfMonth()+"/"+i.getKey().getMonthValue()+"/"+i.getKey().getYear()+")");
 		}
 	}
 	
+	/**
+	 * Metodo para saber los datos del Grupo
+	 * @return
+	 */
 	public String getDatos() {
 		return "'"+nombre+"' ("+pais+")";
 	}
 	
+	/**
+	 * Método que ordena y muestra la discografia ordenada alfabeticamente.
+	 */
 	public void mostrarDiscografiaAlfabetica() {
 		List<String> alfabetic = new ArrayList<>(discografia.values());
 		Collections.sort(alfabetic);
@@ -166,9 +204,14 @@ public class Grupo {
 		}
 	}
 	
+	/**
+	 * Metodo para saber si la lista de CD esta vacia
+	 * @return
+	 */
 	public boolean discografiaVacia() {
 		return (discografia.size() == 0);
 	}
+	
 }
 	
 
