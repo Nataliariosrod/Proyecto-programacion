@@ -1,4 +1,4 @@
-package ejercicio_3;
+package obj;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -152,4 +152,5 @@ public class Grupo {
 	public boolean discografiaVacia() {
 		return (discografia.isEmpty());
 	}
+	
 }

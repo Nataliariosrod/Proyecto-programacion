@@ -1,4 +1,4 @@
-package ejercicio_3;
+package obj;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -415,8 +415,14 @@ public class Ejecucion {
 		 * for (Representante representante : managersList) { if (id ==
 		 * representante.getId()) { representante.getGrupo().setNombre(nombre); } }
 		 */
-		managersList.stream().filter(r -> r.getId() == id).findFirst().ifPresent(r -> r.getGrupo().setNombre(nombre));
-		System.out.println("El nombre se ha cambiado.");
+		if (!managersList.stream().filter(r -> r.getGrupo() != null)
+				.anyMatch(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombre))) {
+			managersList.stream().filter(r -> r.getId() == id).findFirst()
+					.ifPresent(r -> r.getGrupo().setNombre(nombre));
+			System.out.println("El nombre se ha cambiado.");
+		} else {
+			System.out.println("Ya existe un grupo en la lista con ese nombre.");
+		}
 	}
 
 	static void modificarPaisGrupo() {
@@ -431,10 +437,11 @@ public class Ejecucion {
 		System.out.println("El pais se ha cambiado.");
 	}
 
-	static void introducirCd() { // PENDIENTE
+	static void introducirCd() {
 		System.out.println("\nIntroduce el nombre del CD:");
 		String nombre = entrada.nextLine();
-		System.out.println("\nIntroduce la fecha de lanzamiento:");
+		if (!managersList.stream().anyMatch(r -> r.getGrupo().getFechaCd(nombre) != null)) {
+			System.out.println("\nIntroduce la fecha de lanzamiento:");
 		LocalDate fecha = ex.controlDate();
 
 		/*
@@ -446,6 +453,9 @@ public class Ejecucion {
 		managersList.stream().filter(r -> r.getId() == id).findFirst()
 				.ifPresent(r -> r.getGrupo().introducirCd(fecha, nombre));
 		System.out.println("El cd " + nombre + " se ha introducido.");
+		} else {
+			System.out.println("Ya existe un CD en la lista con ese nombre.");
+		}
 	}
 
 	static void listarDiscografia() {
@@ -463,6 +473,7 @@ public class Ejecucion {
 					 * for (Representante representante : managersList) { if (id ==
 					 * representante.getId()) { representante.getGrupo().mostrarDiscografia(); } }
 					 */
+					System.out.println("\nDiscografía de "+managersList.stream().filter(r -> r.getId() == id).findAny().get().getGrupo().getNombre()+"\n");
 					managersList.stream().filter(r -> r.getId() == id).forEach(r -> r.getGrupo().mostrarDiscografia());
 					break;
 				case 2:
@@ -471,6 +482,7 @@ public class Ejecucion {
 					 * representante.getId()) {
 					 * representante.getGrupo().mostrarDiscografiaAlfabetica(); ; } }
 					 */
+					System.out.println("\nDiscografía de "+managersList.stream().filter(r -> r.getId() == id).findAny().get().getGrupo().getNombre()+"");
 					managersList.stream().filter(r -> r.getId() == id)
 							.forEach(r -> r.getGrupo().mostrarDiscografiaAlfabetica());
 					break;
@@ -486,6 +498,7 @@ public class Ejecucion {
 	static void modificarNombreCd(String nombre) {
 		System.out.println("\nIntroduce el nombre nuevo del CD:");
 		String nuevoNombre = entrada.nextLine();
+		if (!managersList.stream().filter(r -> r.getId() == id).anyMatch(r -> r.getGrupo().recorrerDiscografia(nuevoNombre))) {
 		/*
 		 * for (Representante representante : managersList) { if
 		 * (representante.getGrupo().recorrerDiscografia(nombre)) {
@@ -493,11 +506,17 @@ public class Ejecucion {
 		 */
 		managersList.stream().filter(r -> r.getGrupo().recorrerDiscografia(nombre))
 				.forEach(r -> r.getGrupo().modificarNombreCd(nombre, nuevoNombre));
+		System.out.println("El nombre del CD se ha modificado.");
+		} else {
+			System.out.println("Ya existe un CD en la lista con ese nombre.");
+		}
 	}
 
 	static void modificarFechaCd(String nombre) {
+		
 		System.out.println("\nIntroduce la fecha nueva del CD:");
 		LocalDate nuevaFecha = ex.controlDate();
+		if (!managersList.stream().filter(r -> r.getId() == id).anyMatch(r -> r.getGrupo().getFechaCd(nombre).equals(nuevaFecha))) {
 		/*
 		 * for (Representante representante : managersList) { if
 		 * (representante.getGrupo().recorrerDiscografia(nombre)) {
@@ -506,6 +525,9 @@ public class Ejecucion {
 		 */
 		managersList.stream().filter(r -> r.getGrupo().recorrerDiscografia(nombre))
 				.forEach(r -> r.getGrupo().modificarFechaCd(r.getGrupo().getFechaCd(nombre), nuevaFecha));
+		} else {
+			System.out.println("Ya existe un CD en la lista con esa fecha.");
+		}
 	}
 
 	static void menuModificarCD() {

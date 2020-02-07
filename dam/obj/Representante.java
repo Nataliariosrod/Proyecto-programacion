@@ -1,4 +1,4 @@
-package ejercicio_3;
+package obj;
 
 public class Representante {
 
