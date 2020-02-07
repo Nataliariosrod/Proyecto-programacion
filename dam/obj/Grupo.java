@@ -17,8 +17,14 @@ public class Grupo {
 	Grupo() {
 
 	}
-
-	Grupo(String nombre, String pais) {
+	
+	/**
+	 * Constructor Grupo Sobrecargado
+	 * @param nombre
+	 * @param pais
+	 * @param discografia
+	 */
+	Grupo(String nombre, String pais, Map discografia){
 		this.nombre = nombre;
 		this.pais = pais;
 	}
@@ -38,17 +44,28 @@ public class Grupo {
 	public void setPais(String pais) {
 		this.pais = pais;
 	}
-
-	public void introducirCd(LocalDate fecha, String nombre) {
-		LocalDate tempKey = null;
-		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
-			if (i.getKey().equals(fecha)) {
-				tempKey = i.getKey();
+	
+	public String DatosGrup() {
+		return ""+nombre+" ("+pais+")";
+		
+	}
+	
+	/**
+	 * Metodo para introducir un nuevo CD
+	 * @param cd
+	 */
+	public void introducirCD(Cd cd) {
+		LocalDate fecha = cd.getFecha();
+		String nombre = cd.getNombre();
+		LocalDate temkey = null;
+		for(LocalDate i : discografia.keySet()) {
+			if (i.equals(fecha)) {
+				temkey = i;
 			}
 		}
 		if (tempKey != null) {
 			int key = 0;
-			System.out.println("Ya existe un CD con esa fecha de lanzamiento.\n¿Desea sobreescribirlo?");
+			System.out.println("Ya existe un CD con esa fecha de lanzamiento.\nï¿½Desea sobreescribirlo?");
 			while (key == 0) {
 				System.out.println("1. Sobreescribir.\n2. Cancelar.");
 				key = ex.controlInt();
@@ -71,7 +88,12 @@ public class Grupo {
 			discografia.put(fecha, nombre);
 		}
 	}
-
+	
+	/**
+	 * Metodo para Obtener la fecha de salida de un CD
+	 * @param nombre
+	 * @return
+	 */
 	public LocalDate getFechaCd(String nombre) {
 		LocalDate tempKey = null;
 		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
@@ -81,7 +103,12 @@ public class Grupo {
 		}
 		return tempKey;
 	}
-
+	
+	/**
+	 * Motodo para modificar la fecha de un CD
+	 * @param fecha
+	 * @param nuevaFecha
+	 */
 	public void modificarFechaCd(LocalDate fecha, LocalDate nuevaFecha) {
 		String tempVal = null;
 		LocalDate tempKey = null;
@@ -96,7 +123,11 @@ public class Grupo {
 			discografia.put(nuevaFecha, tempVal);
 		}
 	}
-
+	
+	/**
+	 * Metodo para eliminar un CD
+	 * @param nombre
+	 */
 	public void eliminarCd(String nombre) {
 		LocalDate tempKey = null;
 		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
@@ -108,10 +139,15 @@ public class Grupo {
 			discografia.remove(tempKey);
 			System.out.println("El CD " + nombre + " ha sido eliminado.");
 		} else {
-			System.out.println("El nombre introducido no está en la lista.");
+			System.out.println("El nombre introducido no estï¿½ en la lista.");
 		}
 	}
-
+	
+	/**
+	 * Metodo para recorrer la discografia.
+	 * @param nombre
+	 * @return
+	 */
 	public boolean recorrerDiscografia(String nombre) {
 		boolean b = false;
 		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
@@ -122,6 +158,14 @@ public class Grupo {
 		return b;
 	}
 
+
+
+	
+	/**
+	 * Metodo para modificar el nommbre de un CD
+	 * @param nombre
+	 * @param nuevoNombre
+	 */
 	public void modificarNombreCd(String nombre, String nuevoNombre) {
 		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
 			if (i.getValue().equalsIgnoreCase(nombre)) {
@@ -130,6 +174,12 @@ public class Grupo {
 		}
 	}
 
+
+
+	
+	/**
+	 * Metodo para mostrar la discografia.
+	 */
 	public void mostrarDiscografia() {
 		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
 			System.out.println(i.getValue() + " (" + i.getKey().getDayOfMonth() + "/" + i.getKey().getMonthValue() + "/"
@@ -137,9 +187,22 @@ public class Grupo {
 		}
 	}
 
+
+	
+	/**
+	 * Metodo para saber los datos del Grupo
+	 * @return
+	 */
 	public String getDatos() {
 		return "'" + nombre + "' (" + pais + ")";
 	}
+
+
+
+	
+	/**
+	 * Mï¿½todo que ordena y muestra la discografia ordenada alfabeticamente.
+	 */
 
 	public void mostrarDiscografiaAlfabetica() {
 		List<String> alfabetic = new ArrayList<>(discografia.values());
@@ -149,8 +212,21 @@ public class Grupo {
 		}
 	}
 
+
+
+	
+	/**
+	 * Metodo para saber si la lista de CD esta vacia
+	 * @return
+	 */
+
 	public boolean discografiaVacia() {
 		return (discografia.isEmpty());
 	}
+
+
 	
 }
+
+	
+
