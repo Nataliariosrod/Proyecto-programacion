@@ -473,6 +473,7 @@ public class Ejecucion {
 					 * for (Representante representante : managersList) { if (id ==
 					 * representante.getId()) { representante.getGrupo().mostrarDiscografia(); } }
 					 */
+					System.out.println("\nDiscografía de "+managersList.stream().filter(r -> r.getId() == id).findAny().get().getGrupo().getNombre()+"\n");
 					managersList.stream().filter(r -> r.getId() == id).forEach(r -> r.getGrupo().mostrarDiscografia());
 					break;
 				case 2:
@@ -481,6 +482,7 @@ public class Ejecucion {
 					 * representante.getId()) {
 					 * representante.getGrupo().mostrarDiscografiaAlfabetica(); ; } }
 					 */
+					System.out.println("\nDiscografía de "+managersList.stream().filter(r -> r.getId() == id).findAny().get().getGrupo().getNombre()+"");
 					managersList.stream().filter(r -> r.getId() == id)
 							.forEach(r -> r.getGrupo().mostrarDiscografiaAlfabetica());
 					break;
@@ -494,9 +496,9 @@ public class Ejecucion {
 	}
 
 	static void modificarNombreCd(String nombre) {
-		if (!managersList.stream().anyMatch(r -> r.getGrupo().getFechaCd(nombre) != null)) {
 		System.out.println("\nIntroduce el nombre nuevo del CD:");
 		String nuevoNombre = entrada.nextLine();
+		if (!managersList.stream().filter(r -> r.getId() == id).anyMatch(r -> r.getGrupo().recorrerDiscografia(nuevoNombre))) {
 		/*
 		 * for (Representante representante : managersList) { if
 		 * (representante.getGrupo().recorrerDiscografia(nombre)) {
@@ -504,6 +506,7 @@ public class Ejecucion {
 		 */
 		managersList.stream().filter(r -> r.getGrupo().recorrerDiscografia(nombre))
 				.forEach(r -> r.getGrupo().modificarNombreCd(nombre, nuevoNombre));
+		System.out.println("El nombre del CD se ha modificado.");
 		} else {
 			System.out.println("Ya existe un CD en la lista con ese nombre.");
 		}
@@ -513,7 +516,7 @@ public class Ejecucion {
 		
 		System.out.println("\nIntroduce la fecha nueva del CD:");
 		LocalDate nuevaFecha = ex.controlDate();
-		if (!managersList.stream().anyMatch(r -> r.getGrupo().getFechaCd(nombre).equals(nuevaFecha))) {
+		if (!managersList.stream().filter(r -> r.getId() == id).anyMatch(r -> r.getGrupo().getFechaCd(nombre).equals(nuevaFecha))) {
 		/*
 		 * for (Representante representante : managersList) { if
 		 * (representante.getGrupo().recorrerDiscografia(nombre)) {
