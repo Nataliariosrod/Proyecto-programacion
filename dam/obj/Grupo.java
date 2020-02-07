@@ -1,8 +1,3 @@
-/**
- * Grupo
- * 
- * @author Natalia Rios, Curro Caro y Miguel Alcantara
- */
 package obj;
 
 import java.time.LocalDate;
@@ -25,56 +20,51 @@ public class Grupo {
 	/**
 	 * Constructor sin parametros
 	 */
-
+	
 	Grupo() {
 
 	}
 
 	/**
 	 * Constructor con parametros
-	 * 
 	 * @param nombre El nombre del grupo
-	 * @param pais   El pais del grupo
+	 * @param pais El pais del grupo
 	 */
-
+	
 	Grupo(String nombre, String pais) {
 		this.nombre = nombre;
 		this.pais = pais;
 	}
-
+	
 	/**
 	 * Metodo para mostrar el nombre del grupo
-	 * 
 	 * @return el nombre del grupo
 	 */
 
 	public String getNombre() {
 		return nombre;
 	}
-
+	
 	/**
 	 * Metodo para modificar el nombre del grupo
-	 * 
 	 * @param nombre El nuevo nombre del grupo
 	 */
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
+	
 	/**
 	 * Metodo para mostrar el pais
-	 * 
 	 * @return el pais del grupo
 	 */
 
 	public String getPais() {
 		return pais;
 	}
-
+	
 	/**
 	 * Metodo para modificar el pais del grupo
-	 * 
 	 * @param pais El nuevo pais que le queremos dar
 	 */
 
@@ -84,11 +74,10 @@ public class Grupo {
 
 	/**
 	 * Metodo para introducir un cd
-	 * 
-	 * @param fecha  La fecha de salida del cd
+	 * @param fecha La fecha de salida del cd
 	 * @param nombre El nombre del cd
 	 */
-
+	
 	public void introducirCd(LocalDate fecha, String nombre) {
 		LocalDate tempKey = null;
 		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
@@ -121,10 +110,9 @@ public class Grupo {
 			discografia.put(fecha, nombre);
 		}
 	}
-
+	
 	/**
 	 * Metodo para mostrar la fecha del cd
-	 * 
 	 * @param nombre El nombre del cd
 	 * @return la fecha del cd
 	 */
@@ -138,11 +126,10 @@ public class Grupo {
 		}
 		return tempKey;
 	}
-
+	
 	/**
 	 * Metodo para modificar la fecha del cd
-	 * 
-	 * @param fecha      La fecha antigua del cd
+	 * @param fecha La fecha antigua del cd
 	 * @param nuevaFecha La nueva fecha del cd
 	 */
 
@@ -163,10 +150,9 @@ public class Grupo {
 
 	/**
 	 * Metodo para eliminar un cd
-	 * 
 	 * @param nombre El nombre del cd a eliminar
 	 */
-
+	
 	public void eliminarCd(String nombre) {
 		LocalDate tempKey = null;
 		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
@@ -181,11 +167,10 @@ public class Grupo {
 			System.out.println("El nombre introducido no está en la lista.");
 		}
 	}
-
+	
 	/**
 	 * Metodo para ver si un cd esta en la discografia
-	 * 
-	 * @param nombre El nombre del cd
+	 * @param nombre El nombre del cd 
 	 * @return true o false dependiendo de si esta o no.
 	 */
 
@@ -198,11 +183,10 @@ public class Grupo {
 		}
 		return b;
 	}
-
+	
 	/**
 	 * Metodo para modificar el nombre del cd
-	 * 
-	 * @param nombre      El nombre del cd
+	 * @param nombre El nombre del cd
 	 * @param nuevoNombre El nuevo nombre del cd
 	 */
 
@@ -213,7 +197,7 @@ public class Grupo {
 			}
 		}
 	}
-
+	
 	/**
 	 * Metodo para mostrar la discografia
 	 */
@@ -227,10 +211,9 @@ public class Grupo {
 
 	/**
 	 * Metodo para ver los datos del cd
-	 * 
 	 * @return los datos del cd
 	 */
-
+	
 	public String getDatos() {
 		return "'" + nombre + "' (" + pais + ")";
 	}
@@ -238,7 +221,7 @@ public class Grupo {
 	/**
 	 * Metodo para mostrar la discografia ordenada alfabeticamente.
 	 */
-
+	
 	public void mostrarDiscografiaAlfabetica() {
 		List<String> alfabetic = new ArrayList<>(discografia.values());
 		Collections.sort(alfabetic);
@@ -249,12 +232,12 @@ public class Grupo {
 
 	/**
 	 * Metodo para ver si la discografia esta vacia
-	 * 
 	 * @return true o false.
 	 */
-
+	
 	public boolean discografiaVacia() {
 		return (discografia.isEmpty());
 	}
-
+	
 }
+
