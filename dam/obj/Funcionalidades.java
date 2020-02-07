@@ -1,3 +1,8 @@
+/**
+ * Funcionalidades
+ * 
+ * @author Natalia Rios, Curro Caro y Miguel Alcantara
+ */
 package obj;
 
 import java.time.LocalDate;
@@ -9,23 +14,20 @@ public class Funcionalidades {
 
 	/**
 	 * @param managerList Define un ArrayList de Representantes
-	 * @param id Define un numero entero
-	 * @param ex Define un objeto ControlExcepciones
-	 * @param entrada Define un objeto Scanner
+	 * @param id          Define un numero entero
+	 * @param ex          Define un objeto ControlExcepciones
+	 * @param entrada     Define un objeto Scanner
 	 */
-	
+
 	static List<Representante> managersList = new ArrayList<>();
 	static int id;
 	static ControlExcepciones ex = new ControlExcepciones();
 	static Scanner entrada = new Scanner(System.in);
 
-	
-
-	
 	/**
 	 * Metodo para añadir representantes al ArrayList
 	 */
-	
+
 	static void aniadirRepres() {
 		System.out.println("\nIntroduce nombre y apellidos del representante:");
 		String nombre = entrada.nextLine();
@@ -36,7 +38,7 @@ public class Funcionalidades {
 		Representante manager = new Representante(nombre, edad, sueldo);
 		managersList.add(manager);
 	}
-	
+
 	/**
 	 * Metodo para eliminar representantes del ArrayList
 	 */
@@ -54,8 +56,8 @@ public class Funcionalidades {
 		 * representante.getId() + " (" + representante.getNombre() +
 		 * ") tiene asignado un grupo (" + representante.getGrupo().getNombre() + ").");
 		 * System.out.println("Si lo elimina perderá todos los datos de ese grupo.");
-		 * System.out.println("¿Está seguro de que desea eliminarlo?'?\n1. Si\n2. No");
-		 * int key = ex.controlInt(); switch (key) { case 1: temp = representante;
+		 * System.out.println("¿Está seguro de que desea eliminarlo?'?\n1. Si\n2. No"
+		 * ); int key = ex.controlInt(); switch (key) { case 1: temp = representante;
 		 * break; case 2: System.out.println("Cancelando operacion..."); i++; ; break;
 		 * default: System.out.println("Error. Introduce una opcion valida."); key = 0;
 		 * break; } } } } if (temp.getNombre() != null) {
@@ -110,7 +112,7 @@ public class Funcionalidades {
 	/**
 	 * Metodo para listar los representantes
 	 */
-	
+
 	static void listarRepres() {
 		if (listaRepresVacia()) {
 			System.out.println("\nLa lista de representantes esta vacia.\n");
@@ -128,7 +130,7 @@ public class Funcionalidades {
 	/**
 	 * Metodo para modificar el nombre del representante elegido
 	 */
-	
+
 	static void modificarNombreRepres() {
 		System.out.println("\nIntroduce el nuevo nombre:");
 		String nombre = entrada.nextLine();
@@ -143,7 +145,7 @@ public class Funcionalidades {
 	/**
 	 * Metodo para modificar la edad del representante elegido
 	 */
-	
+
 	static void modificarEdadRepres() {
 		System.out.println("\nIntroduce la nueva edad:");
 		int edad = ex.controlInt();
@@ -158,7 +160,7 @@ public class Funcionalidades {
 	/**
 	 * Metodo para modificar el sueldo del representante elegido
 	 */
-	
+
 	static void modificarSueldoRepres() {
 		System.out.println("\nIntroduce el nuevo sueldo:");
 		float sueldo = ex.controlFloat();
@@ -169,7 +171,7 @@ public class Funcionalidades {
 		 */
 		managersList.stream().filter(i -> i.getId() == id).forEach(r -> r.setSueldo(sueldo));
 	}
-	
+
 	/**
 	 * Metodo para cambiar el representante del grupo que queremos
 	 */
@@ -224,7 +226,8 @@ public class Funcionalidades {
 		} else {
 			System.out.println("\nIntroduce el nombre del grupo al que quieres cambiarle el representante:");
 			String nombreGrupo = entrada.nextLine();
-			if (managersList.stream().filter(r -> r.getGrupo() != null).anyMatch(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupo))) {
+			if (managersList.stream().filter(r -> r.getGrupo() != null)
+					.anyMatch(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupo))) {
 				Representante origen = managersList.stream()
 						.filter(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupo)).findFirst()
 						.orElse(new Representante());
@@ -282,9 +285,9 @@ public class Funcionalidades {
 	}
 
 	/**
-	 * Metodo para introducir un nuevo grupo 
+	 * Metodo para introducir un nuevo grupo
 	 */
-	
+
 	static void introducirNuevoGrupo() {
 		/*
 		 * int i = 0; if (listaRepresVacia()) { System.out.println(
@@ -370,7 +373,7 @@ public class Funcionalidades {
 	/**
 	 * Metodo para listar los grupos
 	 */
-	
+
 	static void listarGrupos() {
 		if (listaGruposVacia()) {
 			System.out.println("\nLa lista de grupos representados esta vacia.\n");
@@ -384,10 +387,10 @@ public class Funcionalidades {
 			}
 		}
 	}
-	
 
 	/**
 	 * Metodo que devuelve si la lista de representantes esta vacia
+	 * 
 	 * @return true o false
 	 */
 
@@ -397,6 +400,7 @@ public class Funcionalidades {
 
 	/**
 	 * Metodo que devuelve si la lista de grupos esta vacia.
+	 * 
 	 * @return true en caso de estarlo, false si no lo esta.
 	 */
 	static boolean listaGruposVacia() {
@@ -418,9 +422,10 @@ public class Funcionalidades {
 
 	/**
 	 * Metodo que devuelve si la lista de cds esta vacia
+	 * 
 	 * @return true en caso de estarlo, false si no lo esta.
 	 */
-	
+
 	static boolean listaCdVacia() {
 		/*
 		 * boolean vacia = false; int i = 0;
@@ -444,7 +449,7 @@ public class Funcionalidades {
 	/**
 	 * Metodo para eliminar un grupo
 	 */
-	
+
 	static void eliminarGrupo() {
 		/*
 		 * int i = 0; Representante temp = null; if (listaGruposVacia()) {
@@ -463,10 +468,22 @@ public class Funcionalidades {
 		if (listaGruposVacia()) {
 			System.out.println("\nLa lista de grupos representados esta vacia.\n");
 		} else {
+			System.out.println("\nIntroduce el nombre del grupo que quieres eliminar:");
+			String nombreGrupo = entrada.nextLine();
+			if (managersList.stream().filter(r -> r.getGrupo() != null)
+					.anyMatch(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupo))) {
+				Representante temp = managersList.stream()
+						.filter(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupo)).findAny()
+						.orElse(new Representante());
+				System.out.println("\nEl grupo '" + temp.getGrupo().getNombre() + "' ha sido eliminado.");
+				temp.eliminarGrupo();
+			} else {
+				System.out.println("No existe ning�n grupo en lista con ese nombre.");
+			}
 
 		}
 	}
-	
+
 	/**
 	 * Metodo para modificar el nombre del grupo elegido
 	 */
@@ -492,7 +509,7 @@ public class Funcionalidades {
 	/**
 	 * Metodo para modificar el pais del del grupo
 	 */
-	
+
 	static void modificarPaisGrupo() {
 		System.out.println("\nIntroduce el nuevo pais:");
 		String pais = entrada.nextLine();
@@ -508,30 +525,31 @@ public class Funcionalidades {
 	/**
 	 * Metodo para introducir Cds de un grupo
 	 */
-	
+
 	static void introducirCd() {
 		System.out.println("\nIntroduce el nombre del CD:");
 		String nombre = entrada.nextLine();
 		if (!managersList.stream().anyMatch(r -> r.getGrupo().getFechaCd(nombre) != null)) {
 			System.out.println("\nIntroduce la fecha de lanzamiento:");
-		LocalDate fecha = ex.controlDate();
+			LocalDate fecha = ex.controlDate();
 
-		/*
-		 * for (Representante representante : managersList) { if (id ==
-		 * representante.getId()) { representante.getGrupo().introducirCd(fecha,
-		 * nombre); } }
-		 */
+			/*
+			 * for (Representante representante : managersList) { if (id ==
+			 * representante.getId()) { representante.getGrupo().introducirCd(fecha,
+			 * nombre); } }
+			 */
 
-		managersList.stream().filter(r -> r.getId() == id).findFirst()
-				.ifPresent(r -> r.getGrupo().introducirCd(fecha, nombre));
-		System.out.println("El cd " + nombre + " se ha introducido.");
+			managersList.stream().filter(r -> r.getId() == id).findFirst()
+					.ifPresent(r -> r.getGrupo().introducirCd(fecha, nombre));
+			System.out.println("El cd " + nombre + " se ha introducido.");
 		} else {
 			System.out.println("Ya existe un CD en la lista con ese nombre.");
 		}
 	}
-	
+
 	/**
-	 * Metodo para listar la discografia, puede hacerlo por orden alfabetico o por fecha de lanzamiento.
+	 * Metodo para listar la discografia, puede hacerlo por orden alfabetico o por
+	 * fecha de lanzamiento.
 	 */
 
 	static void listarDiscografia() {
@@ -549,7 +567,9 @@ public class Funcionalidades {
 					 * for (Representante representante : managersList) { if (id ==
 					 * representante.getId()) { representante.getGrupo().mostrarDiscografia(); } }
 					 */
-					System.out.println("\nDiscografia de "+managersList.stream().filter(r -> r.getId() == id).findAny().get().getGrupo().getNombre()+"\n");
+					System.out.println("\nDiscografia de "
+							+ managersList.stream().filter(r -> r.getId() == id).findAny().get().getGrupo().getNombre()
+							+ "\n");
 					managersList.stream().filter(r -> r.getId() == id).forEach(r -> r.getGrupo().mostrarDiscografia());
 					break;
 				case 2:
@@ -558,7 +578,9 @@ public class Funcionalidades {
 					 * representante.getId()) {
 					 * representante.getGrupo().mostrarDiscografiaAlfabetica(); ; } }
 					 */
-					System.out.println("\nDiscografia de "+managersList.stream().filter(r -> r.getId() == id).findAny().get().getGrupo().getNombre()+"");
+					System.out.println("\nDiscografia de "
+							+ managersList.stream().filter(r -> r.getId() == id).findAny().get().getGrupo().getNombre()
+							+ "");
 					managersList.stream().filter(r -> r.getId() == id)
 							.forEach(r -> r.getGrupo().mostrarDiscografiaAlfabetica());
 					break;
@@ -573,53 +595,58 @@ public class Funcionalidades {
 
 	/**
 	 * Metodo para modificar el nombre del cd elegido.
+	 * 
 	 * @param nombre El nombre del cd que queremos cambiar.
 	 */
-	
+
 	static void modificarNombreCd(String nombre) {
 		System.out.println("\nIntroduce el nombre nuevo del CD:");
 		String nuevoNombre = entrada.nextLine();
-		if (!managersList.stream().filter(r -> r.getId() == id).anyMatch(r -> r.getGrupo().recorrerDiscografia(nuevoNombre))) {
-		/*
-		 * for (Representante representante : managersList) { if
-		 * (representante.getGrupo().recorrerDiscografia(nombre)) {
-		 * representante.getGrupo().modificarNombreCd(nombre, nuevoNombre); } }
-		 */
-		managersList.stream().filter(r -> r.getGrupo().recorrerDiscografia(nombre))
-				.forEach(r -> r.getGrupo().modificarNombreCd(nombre, nuevoNombre));
-		System.out.println("El nombre del CD se ha modificado.");
+		if (!managersList.stream().filter(r -> r.getId() == id)
+				.anyMatch(r -> r.getGrupo().recorrerDiscografia(nuevoNombre))) {
+			/*
+			 * for (Representante representante : managersList) { if
+			 * (representante.getGrupo().recorrerDiscografia(nombre)) {
+			 * representante.getGrupo().modificarNombreCd(nombre, nuevoNombre); } }
+			 */
+			managersList.stream().filter(r -> r.getGrupo().recorrerDiscografia(nombre))
+					.forEach(r -> r.getGrupo().modificarNombreCd(nombre, nuevoNombre));
+			System.out.println("El nombre del CD se ha modificado.");
 		} else {
 			System.out.println("Ya existe un CD en la lista con ese nombre.");
 		}
 	}
-	
+
 	/**
 	 * Metodo para modificar la fecha del cd
+	 * 
 	 * @param nombre El nombre del cd al que le queremos cambiar la fecha
 	 */
 
 	static void modificarFechaCd(String nombre) {
-		
+
 		System.out.println("\nIntroduce la fecha nueva del CD:");
 		LocalDate nuevaFecha = ex.controlDate();
-		if (!managersList.stream().filter(r -> r.getId() == id).anyMatch(r -> r.getGrupo().getFechaCd(nombre).equals(nuevaFecha))) {
-		/*
-		 * for (Representante representante : managersList) { if
-		 * (representante.getGrupo().recorrerDiscografia(nombre)) {
-		 * representante.getGrupo().modificarFechaCd(representante.getGrupo().getFechaCd
-		 * (nombre), nuevaFecha); } }
-		 */
-		managersList.stream().filter(r -> r.getGrupo().recorrerDiscografia(nombre))
-				.forEach(r -> r.getGrupo().modificarFechaCd(r.getGrupo().getFechaCd(nombre), nuevaFecha));
+		if (!managersList.stream().filter(r -> r.getId() == id)
+				.anyMatch(r -> r.getGrupo().getFechaCd(nombre).equals(nuevaFecha))) {
+			/*
+			 * for (Representante representante : managersList) { if
+			 * (representante.getGrupo().recorrerDiscografia(nombre)) {
+			 * representante.getGrupo().modificarFechaCd(representante.getGrupo().getFechaCd
+			 * (nombre), nuevaFecha); } }
+			 */
+			managersList.stream().filter(r -> r.getGrupo().recorrerDiscografia(nombre))
+					.forEach(r -> r.getGrupo().modificarFechaCd(r.getGrupo().getFechaCd(nombre), nuevaFecha));
 		} else {
 			System.out.println("Ya existe un CD en la lista con esa fecha.");
 		}
 	}
 
 	/**
-	 * Metodo que muestra un menu que nos dara a elegir que queremos modificar del cd
+	 * Metodo que muestra un menu que nos dara a elegir que queremos modificar del
+	 * cd
 	 */
-	
+
 	static void menuModificarCD() {
 		if (listaCdVacia()) {
 			System.out.println("La lista de CDs esta vacia.");
@@ -671,8 +698,7 @@ public class Funcionalidades {
 	/**
 	 * Metodo para eliminar un cd
 	 */
-	
-	
+
 	static void eliminarCD() {
 		if (listaCdVacia()) {
 			System.out.println("La lista de CDs esta vacia.");
@@ -687,9 +713,10 @@ public class Funcionalidades {
 			managersList.stream().filter(r -> r.getId() == id).forEach(r -> r.getGrupo().eliminarCd(nombre));
 		}
 	}
-	
+
 	/**
-	 * Metodo que muestra un menu que nos dara a elegir que queremos hacer con la discografia
+	 * Metodo que muestra un menu que nos dara a elegir que queremos hacer con la
+	 * discografia
 	 */
 
 	static void menuDiscografia() {
@@ -728,9 +755,10 @@ public class Funcionalidades {
 	}
 
 	/**
-	 * Metodo que muestra un menu que nos dara a elegir que queremos modificar del grupo
+	 * Metodo que muestra un menu que nos dara a elegir que queremos modificar del
+	 * grupo
 	 */
-	
+
 	static void menuModificarGrupo() {
 		int i = 0;
 		Representante temp = null;
@@ -746,7 +774,8 @@ public class Funcionalidades {
 				 * (nombreGrupo.equalsIgnoreCase(representante.getGrupo().getNombre())) { temp =
 				 * representante; id = representante.getId(); } } }
 				 */
-				if (managersList.stream().filter(r -> r.getGrupo() != null).anyMatch(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupo))) {
+				if (managersList.stream().filter(r -> r.getGrupo() != null)
+						.anyMatch(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupo))) {
 					temp = managersList.stream().filter(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupo))
 							.findAny().orElse(new Representante());
 					id = temp.getId();
@@ -758,7 +787,7 @@ public class Funcionalidades {
 						System.out.println("2. Modificar pais del grupo.");
 						System.out.println("3. Ir a MENU DISCOGRAFIA.");
 						System.out.println("0. Volver al menu anterior.");
-						
+
 						key = ex.controlInt();
 
 						switch (key) {
@@ -799,9 +828,10 @@ public class Funcionalidades {
 			} while (i == 0);
 		}
 	}
-	
+
 	/**
-	 * Metodo que muestra un menu que nos dara a elegir que queremos modificar del representante.
+	 * Metodo que muestra un menu que nos dara a elegir que queremos modificar del
+	 * representante.
 	 */
 
 	static void menuModificarRepres() {
@@ -861,9 +891,10 @@ public class Funcionalidades {
 	}
 
 	/**
-	 * Metodo que muestra un menu que nos dara a elegir que queremos hacer con el representante
+	 * Metodo que muestra un menu que nos dara a elegir que queremos hacer con el
+	 * representante
 	 */
-	
+
 	static void menuRepres() {
 		int key = 0;
 		do {
@@ -900,9 +931,10 @@ public class Funcionalidades {
 	}
 
 	/**
-	 * Metodo que muestra un menu en el que podremos seleccionar que hacer con los grupos
+	 * Metodo que muestra un menu en el que podremos seleccionar que hacer con los
+	 * grupos
 	 */
-	
+
 	static void menuGrupos() {
 		int key = 0;
 		do {
@@ -943,9 +975,10 @@ public class Funcionalidades {
 	}
 
 	/**
-	 * Metodo que muestra un primer menu en el que podemos seleccionar a que menu queremos ir.
+	 * Metodo que muestra un primer menu en el que podemos seleccionar a que menu
+	 * queremos ir.
 	 */
-	
+
 	static void menuPrincipal() {
 		int key = 0;
 		do {
