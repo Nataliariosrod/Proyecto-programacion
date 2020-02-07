@@ -6,22 +6,23 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
 public class Grupo {
-	
+
 	private String nombre;
 	private String pais;
 	private Map<LocalDate, String> discografia = new TreeMap<>();
 	private ControlExcepciones ex = new ControlExcepciones();
-	
+
 	Grupo() {
-		
+
 	}
-	
+
 	Grupo(String nombre, String pais) {
 		this.nombre = nombre;
 		this.pais = pais;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -38,9 +39,7 @@ public class Grupo {
 		this.pais = pais;
 	}
 
-	public void introducirCd(Cd cd) {
-		LocalDate fecha = cd.getFecha();
-		String nombre = cd.getNombre();
+	public void introducirCd(LocalDate fecha, String nombre) {
 		LocalDate tempKey = null;
 		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
 			if (i.getKey().equals(fecha)) {
@@ -68,12 +67,11 @@ public class Grupo {
 					break;
 				}
 			}
-		}
-		else {
+		} else {
 			discografia.put(fecha, nombre);
 		}
 	}
-	
+
 	public LocalDate getFechaCd(String nombre) {
 		LocalDate tempKey = null;
 		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
@@ -83,7 +81,7 @@ public class Grupo {
 		}
 		return tempKey;
 	}
-	
+
 	public void modificarFechaCd(LocalDate fecha, LocalDate nuevaFecha) {
 		String tempVal = null;
 		LocalDate tempKey = null;
@@ -98,7 +96,7 @@ public class Grupo {
 			discografia.put(nuevaFecha, tempVal);
 		}
 	}
-	
+
 	public void eliminarCd(String nombre) {
 		LocalDate tempKey = null;
 		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
@@ -108,50 +106,50 @@ public class Grupo {
 		}
 		if (tempKey != null) {
 			discografia.remove(tempKey);
-			System.out.println("El CD "+nombre+" ha sido eliminado.");
-		}
-		else {
+			System.out.println("El CD " + nombre + " ha sido eliminado.");
+		} else {
 			System.out.println("El nombre introducido no está en la lista.");
 		}
 	}
-	
+
 	public boolean recorrerDiscografia(String nombre) {
 		boolean b = false;
-		for(Map.Entry<LocalDate, String> i : discografia.entrySet()) {
+		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
 			if (i.getValue().equalsIgnoreCase(nombre)) {
 				b = true;
 			}
 		}
 		return b;
 	}
-	
+
 	public void modificarNombreCd(String nombre, String nuevoNombre) {
-		for(Map.Entry<LocalDate, String> i : discografia.entrySet()) {
+		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
 			if (i.getValue().equalsIgnoreCase(nombre)) {
 				i.setValue(nuevoNombre);
 			}
 		}
 	}
-	
+
 	public void mostrarDiscografia() {
-		for(Map.Entry<LocalDate, String> i : discografia.entrySet()) {
-			System.out.println(i.getValue()+" ("+i.getKey().getDayOfMonth()+"/"+i.getKey().getMonthValue()+"/"+i.getKey().getYear()+")");
+		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
+			System.out.println(i.getValue() + " (" + i.getKey().getDayOfMonth() + "/" + i.getKey().getMonthValue() + "/"
+					+ i.getKey().getYear() + ")");
 		}
 	}
-	
+
 	public String getDatos() {
-		return "'"+nombre+"' ("+pais+")";
+		return "'" + nombre + "' (" + pais + ")";
 	}
-	
+
 	public void mostrarDiscografiaAlfabetica() {
 		List<String> alfabetic = new ArrayList<>(discografia.values());
 		Collections.sort(alfabetic);
-		for(String nombre : alfabetic) {
+		for (String nombre : alfabetic) {
 			System.out.println(nombre);
 		}
 	}
-	
+
 	public boolean discografiaVacia() {
-		return (discografia.size() == 0);
+		return (discografia.isEmpty());
 	}
 }

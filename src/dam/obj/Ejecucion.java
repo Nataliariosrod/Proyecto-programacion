@@ -459,12 +459,11 @@ public class Ejecucion {
 		System.out.println("\nIntroduce el nombre del CD:");
 		String nombre = entrada.nextLine();
 		System.out.println("\nIntroduce la fecha de lanzamiento:");
-		cd.setFecha(ex.controlDate());
-		cd.setNombre(nombre);
+		LocalDate fecha = ex.controlDate();
 		
 		for (Representante representante : managersList) {
 			if(id == representante.getId()) {
-				representante.getGrupo().introducirCd(cd);
+				representante.getGrupo().introducirCd(fecha,nombre);
 			}
 		}
 	}
