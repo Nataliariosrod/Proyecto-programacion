@@ -29,7 +29,7 @@ public class ControlExcepciones {
 				entrada.nextLine();
 				error = true;
 			}
-		} while (error);
+		} while (error || i < 0);
 		return i;
 	}
 
@@ -82,7 +82,7 @@ public class ControlExcepciones {
 			int dia = controlInt();
 			System.out.println("Mes:");
 			int mes = controlInt();
-			System.out.println("Año:");
+			System.out.println("Aï¿½o:");
 			int anio = controlInt();
 			try {
 				date = LocalDate.of(anio, mes, dia);

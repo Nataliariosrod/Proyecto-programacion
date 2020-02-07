@@ -1,7 +1,7 @@
 package obj;
 
 public class Representante {
-
+	
 	/**
 	 * Definimos atributos de la clase
 	 */
