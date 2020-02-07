@@ -29,7 +29,7 @@ public class Ejecucion {
 	 * Metodo para añadir representantes al ArrayList
 	 */
 	
-	static void añadirRepres() {
+	static void aniadirRepres() {
 		System.out.println("\nIntroduce nombre y apellidos del representante:");
 		String nombre = entrada.nextLine();
 		System.out.println("Introduce edad del representante:");
@@ -227,7 +227,7 @@ public class Ejecucion {
 		} else {
 			System.out.println("\nIntroduce el nombre del grupo al que quieres cambiarle el representante:");
 			String nombreGrupo = entrada.nextLine();
-			if (managersList.stream().anyMatch(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupo))) {
+			if (managersList.stream().filter(r -> r.getGrupo() != null).anyMatch(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupo))) {
 				Representante origen = managersList.stream()
 						.filter(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupo)).findFirst()
 						.orElse(new Representante());
@@ -881,7 +881,7 @@ public class Ejecucion {
 			key = ex.controlInt();
 			switch (key) {
 			case 1:
-				añadirRepres();
+				aniadirRepres();
 				break;
 			case 2:
 				listarRepres();
