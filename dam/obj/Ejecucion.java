@@ -749,7 +749,7 @@ public class Ejecucion {
 				 * (nombreGrupo.equalsIgnoreCase(representante.getGrupo().getNombre())) { temp =
 				 * representante; id = representante.getId(); } } }
 				 */
-				if (managersList.stream().anyMatch(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupo))) {
+				if (managersList.stream().filter(r -> r.getGrupo() != null).anyMatch(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupo))) {
 					temp = managersList.stream().filter(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupo))
 							.findAny().orElse(new Representante());
 					id = temp.getId();
@@ -761,7 +761,7 @@ public class Ejecucion {
 						System.out.println("2. Modificar pais del grupo.");
 						System.out.println("3. Ir a MENU DISCOGRAFIA.");
 						System.out.println("0. Volver al menu anterior.");
-						;
+						
 						key = ex.controlInt();
 
 						switch (key) {
