@@ -147,40 +147,42 @@ public class Grupo {
 	 */
 
 	public void modificarFechaCd(LocalDate fecha, LocalDate nuevaFecha) {
-		String tempVal = null;
-		LocalDate tempKey = null;
-		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
-			if (i.getKey().equals(fecha)) {
-				tempVal = i.getValue();
-				tempKey = i.getKey();
-			}
-		}
-			if (tempKey != null) {
-				int key = 0;
-				System.out.println("Ya existe un CD con esa fecha de lanzamiento.\n¿Desea sobreescribirlo?");
-				while (key == 0) {
-					System.out.println("1. Sobreescribir.\n2. Cancelar.");
-					key = ex.controlInt();
-					switch (key) {
-					case 1:
-						discografia.remove(tempKey);
-						discografia.put(nuevaFecha, tempVal);
-						System.out.println("El CD ha sido sobreescrito");
-						break;
-					case 2:
-						System.out.println("Cancelando operacion...");
-						break;
-					default:
-						System.out.println("Error. Introduce una opcion valida:");
-						key = 0;
-						break;
-					}
+		/*
+		 * String tempVal = null; LocalDate tempKey = null; for (Map.Entry<LocalDate,
+		 * String> i : discografia.entrySet()) { if (i.getKey().equals(fecha)) { tempVal
+		 * = i.getValue(); tempKey = i.getKey(); } }
+		 */
+		String tempVal = discografia.entrySet().stream().filter(d -> d.getKey().equals(fecha)).findFirst().get()
+				.getValue();
+		LocalDate tempKey = discografia.entrySet().stream().filter(d -> d.getKey().equals(fecha)).findFirst().get()
+				.getKey();
+		if (discografia.entrySet().stream().anyMatch(d -> d.getKey().equals(nuevaFecha))) {
+			int key = 0;
+			System.out.println("Ya existe un CD con esa fecha de lanzamiento.\n¿Desea sobreescribirlo?");
+			while (key == 0) {
+				System.out.println("1. Sobreescribir.\n2. Cancelar.");
+				key = ex.controlInt();
+				switch (key) {
+				case 1:
+					discografia.remove(tempKey);
+					discografia.put(nuevaFecha, tempVal);
+					System.out.println("El CD ha sido sobreescrito");
+					break;
+				case 2:
+					System.out.println("Cancelando operacion...");
+					break;
+				default:
+					System.out.println("Error. Introduce una opcion valida:");
+					key = 0;
+					break;
 				}
-			} else {
-				discografia.remove(tempKey);
-				discografia.put(nuevaFecha, tempVal);
 			}
+		} else {
+			discografia.remove(tempKey);
+			discografia.put(nuevaFecha, tempVal);
+			System.out.println("La fecha se ha cambiado correctamente.");
 		}
+	}
 
 	/**
 	 * Metodo para eliminar un cd

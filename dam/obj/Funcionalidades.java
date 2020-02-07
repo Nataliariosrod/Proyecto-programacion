@@ -634,8 +634,8 @@ public class Funcionalidades {
 
 		System.out.println("\nIntroduce la fecha nueva del CD:");
 		LocalDate nuevaFecha = ex.controlDate();
-		if (!managersList.stream().filter(r -> r.getId() == id).filter(r -> r.getGrupo() != null)
-				.anyMatch(r -> r.getGrupo().getFechaCd(nombre).equals(nuevaFecha))) {
+		if (managersList.stream().filter(r -> r.getId() == id).filter(r -> r.getGrupo() != null)
+				.noneMatch(r -> r.getGrupo().getFechaCd(nombre).equals(nuevaFecha))) {
 			/*
 			 * for (Representante representante : managersList) { if
 			 * (representante.getGrupo().recorrerDiscografia(nombre)) {
@@ -646,7 +646,7 @@ public class Funcionalidades {
 					.orElse(new Representante());
 			temp.getGrupo().modificarFechaCd(temp.getGrupo().getFechaCd(nombre), nuevaFecha);
 		} else {
-			System.out.println("Ya existe un CD en la lista con esa fecha.");
+			System.out.println("Introduce una fecha diferente a la que tiene actualmente.");
 		}
 	}
 
