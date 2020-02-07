@@ -155,11 +155,32 @@ public class Grupo {
 				tempKey = i.getKey();
 			}
 		}
-		if (tempKey != null) {
-			discografia.remove(tempKey);
-			discografia.put(nuevaFecha, tempVal);
+			if (tempKey != null) {
+				int key = 0;
+				System.out.println("Ya existe un CD con esa fecha de lanzamiento.\n¿Desea sobreescribirlo?");
+				while (key == 0) {
+					System.out.println("1. Sobreescribir.\n2. Cancelar.");
+					key = ex.controlInt();
+					switch (key) {
+					case 1:
+						discografia.remove(tempKey);
+						discografia.put(nuevaFecha, tempVal);
+						System.out.println("El CD ha sido sobreescrito");
+						break;
+					case 2:
+						System.out.println("Cancelando operacion...");
+						break;
+					default:
+						System.out.println("Error. Introduce una opcion valida:");
+						key = 0;
+						break;
+					}
+				}
+			} else {
+				discografia.remove(tempKey);
+				discografia.put(nuevaFecha, tempVal);
+			}
 		}
-	}
 
 	/**
 	 * Metodo para eliminar un cd
@@ -170,7 +191,7 @@ public class Grupo {
 	public void eliminarCd(String nombre) {
 		LocalDate tempKey = null;
 		for (Map.Entry<LocalDate, String> i : discografia.entrySet()) {
-			if (i.getValue().contentEquals(nombre)) {
+			if (i.getValue().equalsIgnoreCase(nombre)) {
 				tempKey = i.getKey();
 			}
 		}
@@ -178,7 +199,7 @@ public class Grupo {
 			discografia.remove(tempKey);
 			System.out.println("El CD " + nombre + " ha sido eliminado.");
 		} else {
-			System.out.println("El nombre introducido no está en la lista.");
+			System.out.println("El nombre introducido no esta en la lista.");
 		}
 	}
 

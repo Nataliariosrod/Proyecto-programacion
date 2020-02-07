@@ -82,7 +82,7 @@ public class ControlExcepciones {
 			int dia = controlInt();
 			System.out.println("Mes:");
 			int mes = controlInt();
-			System.out.println("A�o:");
+			System.out.println("Anio:");
 			int anio = controlInt();
 			try {
 				date = LocalDate.of(anio, mes, dia);

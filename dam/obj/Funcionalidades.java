@@ -23,6 +23,7 @@ public class Funcionalidades {
 	static int id;
 	static ControlExcepciones ex = new ControlExcepciones();
 	static Scanner entrada = new Scanner(System.in);
+	static String nombreGrupoSt;
 
 	/**
 	 * Metodo para aÃ±adir representantes al ArrayList
@@ -442,7 +443,8 @@ public class Funcionalidades {
 			 */
 			// return vacia;
 		} else {
-			return (managersList.stream().map(r -> r).allMatch(r -> r.getGrupo().discografiaVacia() == true));
+			return (managersList.stream().map(r -> r).filter(r -> r.getId() == id).filter(r -> r.getGrupo() != null)
+					.allMatch(r -> r.getGrupo().discografiaVacia() == true));
 		}
 	}
 
@@ -490,16 +492,16 @@ public class Funcionalidades {
 
 	static void modificarNombreGrupo() {
 		System.out.println("\nIntroduce el nuevo nombre:");
-		String nombre = entrada.nextLine();
+		nombreGrupoSt = entrada.nextLine();
 
 		/*
 		 * for (Representante representante : managersList) { if (id ==
 		 * representante.getId()) { representante.getGrupo().setNombre(nombre); } }
 		 */
 		if (!managersList.stream().filter(r -> r.getGrupo() != null)
-				.anyMatch(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombre))) {
+				.anyMatch(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupoSt))) {
 			managersList.stream().filter(r -> r.getId() == id).findFirst()
-					.ifPresent(r -> r.getGrupo().setNombre(nombre));
+					.ifPresent(r -> r.getGrupo().setNombre(nombreGrupoSt));
 			System.out.println("El nombre se ha cambiado.");
 		} else {
 			System.out.println("Ya existe un grupo en la lista con ese nombre.");
@@ -529,7 +531,8 @@ public class Funcionalidades {
 	static void introducirCd() {
 		System.out.println("\nIntroduce el nombre del CD:");
 		String nombre = entrada.nextLine();
-		if (!managersList.stream().anyMatch(r -> r.getGrupo().getFechaCd(nombre) != null)) {
+		if (!managersList.stream().filter(r -> r.getGrupo() != null)
+				.anyMatch(r -> r.getGrupo().getFechaCd(nombre) != null)) {
 			System.out.println("\nIntroduce la fecha de lanzamiento:");
 			LocalDate fecha = ex.controlDate();
 
@@ -559,7 +562,7 @@ public class Funcionalidades {
 			int key = 0;
 			while (key == 0) {
 				System.out.println(
-						"¿Como quiere mostrar la discografia?\n1. Por fecha de lanzamiento.\n2. Por orden alfabÃ©tico");
+						"¿Como quiere mostrar la discografia?\n1. Por fecha de lanzamiento.\n2. Por orden alfabe2tico");
 				key = ex.controlInt();
 				switch (key) {
 				case 1:
@@ -567,10 +570,13 @@ public class Funcionalidades {
 					 * for (Representante representante : managersList) { if (id ==
 					 * representante.getId()) { representante.getGrupo().mostrarDiscografia(); } }
 					 */
-					System.out.println("\nDiscografia de "
-							+ managersList.stream().filter(r -> r.getId() == id).findAny().get().getGrupo().getNombre()
-							+ "\n");
-					managersList.stream().filter(r -> r.getId() == id).forEach(r -> r.getGrupo().mostrarDiscografia());
+					System.out
+							.println("\nDiscografia de "
+									+ managersList.stream().filter(r -> r.getId() == id)
+											.filter(r -> r.getGrupo() != null).findAny().get().getGrupo().getNombre()
+									+ "\n");
+					managersList.stream().filter(r -> r.getId() == id).filter(r -> r.getGrupo() != null)
+							.forEach(r -> r.getGrupo().mostrarDiscografia());
 					break;
 				case 2:
 					/*
@@ -609,8 +615,9 @@ public class Funcionalidades {
 			 * (representante.getGrupo().recorrerDiscografia(nombre)) {
 			 * representante.getGrupo().modificarNombreCd(nombre, nuevoNombre); } }
 			 */
-			managersList.stream().filter(r -> r.getGrupo().recorrerDiscografia(nombre))
-					.forEach(r -> r.getGrupo().modificarNombreCd(nombre, nuevoNombre));
+			Representante temp = managersList.stream().filter(r -> r.getGrupo().recorrerDiscografia(nombre)).findAny()
+					.orElse(new Representante());
+			temp.getGrupo().modificarNombreCd(nombre, nuevoNombre);
 			System.out.println("El nombre del CD se ha modificado.");
 		} else {
 			System.out.println("Ya existe un CD en la lista con ese nombre.");
@@ -627,7 +634,7 @@ public class Funcionalidades {
 
 		System.out.println("\nIntroduce la fecha nueva del CD:");
 		LocalDate nuevaFecha = ex.controlDate();
-		if (!managersList.stream().filter(r -> r.getId() == id)
+		if (!managersList.stream().filter(r -> r.getId() == id).filter(r -> r.getGrupo() != null)
 				.anyMatch(r -> r.getGrupo().getFechaCd(nombre).equals(nuevaFecha))) {
 			/*
 			 * for (Representante representante : managersList) { if
@@ -635,8 +642,9 @@ public class Funcionalidades {
 			 * representante.getGrupo().modificarFechaCd(representante.getGrupo().getFechaCd
 			 * (nombre), nuevaFecha); } }
 			 */
-			managersList.stream().filter(r -> r.getGrupo().recorrerDiscografia(nombre))
-					.forEach(r -> r.getGrupo().modificarFechaCd(r.getGrupo().getFechaCd(nombre), nuevaFecha));
+			Representante temp = managersList.stream().filter(r -> r.getGrupo().recorrerDiscografia(nombre)).findAny()
+					.orElse(new Representante());
+			temp.getGrupo().modificarFechaCd(temp.getGrupo().getFechaCd(nombre), nuevaFecha);
 		} else {
 			System.out.println("Ya existe un CD en la lista con esa fecha.");
 		}
@@ -658,7 +666,8 @@ public class Funcionalidades {
 			 * for (Representante representante : managersList) { if
 			 * (representante.getGrupo().recorrerDiscografia(nombreCd))
 			 */
-			if (managersList.stream().anyMatch(r -> r.getGrupo().recorrerDiscografia(nombreCd))) {
+			if (managersList.stream().filter(r -> r.getId() == id)
+					.anyMatch(r -> r.getGrupo().recorrerDiscografia(nombreCd))) {
 				int key = 0;
 				do {
 					System.out.println("\nMENU MODIFICAR CD");
@@ -671,14 +680,10 @@ public class Funcionalidades {
 
 					switch (key) {
 					case 1:
-						// modificarNombreCd(nombreCd);
-						managersList.stream().filter(r -> r.getGrupo().recorrerDiscografia(nombreCd))
-								.forEach(r -> modificarNombreCd(nombreCd));
+						modificarNombreCd(nombreCd);
 						break;
 					case 2:
-						// modificarFechaCd(nombreCd);
-						managersList.stream().filter(r -> r.getGrupo().recorrerDiscografia(nombreCd))
-								.forEach(r -> modificarFechaCd(nombreCd));
+						modificarFechaCd(nombreCd);
 						break;
 					case 0:
 						System.out.println("Volviendo al menu anterior...");
@@ -767,7 +772,7 @@ public class Funcionalidades {
 		} else {
 			do {
 				System.out.println("\nIntroduce el nombre del grupo que quieres modificar:");
-				String nombreGrupo = entrada.nextLine();
+				nombreGrupoSt = entrada.nextLine();
 				/*
 				 * for (Representante representante : managersList) { if
 				 * (representante.getGrupo() != null) { if
@@ -775,9 +780,10 @@ public class Funcionalidades {
 				 * representante; id = representante.getId(); } } }
 				 */
 				if (managersList.stream().filter(r -> r.getGrupo() != null)
-						.anyMatch(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupo))) {
-					temp = managersList.stream().filter(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupo))
-							.findAny().orElse(new Representante());
+						.anyMatch(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupoSt))) {
+					temp = managersList.stream().filter(r -> r.getGrupo() != null)
+							.filter(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupoSt)).findAny()
+							.orElse(new Representante());
 					id = temp.getId();
 					int key = 0;
 					do {
@@ -821,7 +827,8 @@ public class Funcionalidades {
 				 * println("El nombre introducido no es valido.\nLos grupos actuales son:");
 				 * listarGrupos(); }
 				 */
-				if (!managersList.stream().anyMatch(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupo))) {
+				if (!managersList.stream().filter(r -> r.getGrupo() != null)
+						.anyMatch(r -> r.getGrupo().getNombre().equalsIgnoreCase(nombreGrupoSt))) {
 					System.out.println("El nombre introducido no es valido.\nLos grupos actuales son:");
 					listarGrupos();
 				}
