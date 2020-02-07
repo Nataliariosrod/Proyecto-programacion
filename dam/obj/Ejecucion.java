@@ -7,6 +7,13 @@ import java.time.LocalDate;
 
 public class Ejecucion {
 
+	/**
+	 * @param managerList Define un ArrayList de Representantes
+	 * @param id Define un numero entero
+	 * @param ex Define un objeto ControlExcepciones
+	 * @param entrada Define un objeto Scanner
+	 */
+	
 	static List<Representante> managersList = new ArrayList<>();
 	static int id;
 	static ControlExcepciones ex = new ControlExcepciones();
@@ -17,7 +24,12 @@ public class Ejecucion {
 		menuPrincipal();
 	}
 
-	static void añadirRepres() {
+	
+	/**
+	 * Metodo para aÃ±adir representantes al ArrayList
+	 */
+	
+	static void aÃ±adirRepres() {
 		System.out.println("\nIntroduce nombre y apellidos del representante:");
 		String nombre = entrada.nextLine();
 		System.out.println("Introduce edad del representante:");
@@ -27,6 +39,10 @@ public class Ejecucion {
 		Representante manager = new Representante(nombre, edad, sueldo);
 		managersList.add(manager);
 	}
+	
+	/**
+	 * Metodo para eliminar representantes del ArrayList
+	 */
 
 	static void eliminarRepres() {
 		/*
@@ -40,8 +56,8 @@ public class Ejecucion {
 		 * System.out.println("ATENCION. El representante con ID " +
 		 * representante.getId() + " (" + representante.getNombre() +
 		 * ") tiene asignado un grupo (" + representante.getGrupo().getNombre() + ").");
-		 * System.out.println("Si lo elimina perderá todos los datos de ese grupo.");
-		 * System.out.println("¿Está seguro de que desea eliminarlo?'?\n1. Si\n2. No");
+		 * System.out.println("Si lo elimina perderÃ¡ todos los datos de ese grupo.");
+		 * System.out.println("Â¿EstÃ¡ seguro de que desea eliminarlo?'?\n1. Si\n2. No");
 		 * int key = ex.controlInt(); switch (key) { case 1: temp = representante;
 		 * break; case 2: System.out.println("Cancelando operacion..."); i++; ; break;
 		 * default: System.out.println("Error. Introduce una opcion valida."); key = 0;
@@ -64,8 +80,8 @@ public class Ejecucion {
 				if (temp.getGrupo() != null) {
 					System.out.println("ATENCION. El representante con ID " + temp.getId() + " (" + temp.getNombre()
 							+ ") tiene asignado un grupo (" + temp.getGrupo().getNombre() + ").");
-					System.out.println("Si lo elimina perderá todos los datos de ese grupo.");
-					System.out.println("¿Está seguro de que desea eliminarlo?'?\n1. Si\n2. No");
+					System.out.println("Si lo elimina perderÃ¡ todos los datos de ese grupo.");
+					System.out.println("Â¿EstÃ¡ seguro de que desea eliminarlo?'?\n1. Si\n2. No");
 					int key = ex.controlInt();
 					switch (key) {
 					case 1:
@@ -94,6 +110,10 @@ public class Ejecucion {
 		}
 	}
 
+	/**
+	 * Metodo para listar los representantes
+	 */
+	
 	static void listarRepres() {
 		if (listaRepresVacia()) {
 			System.out.println("\nLa lista de representantes esta vacia.\n");
@@ -108,6 +128,10 @@ public class Ejecucion {
 		}
 	}
 
+	/**
+	 * Metodo para modificar el nombre del representante elegido
+	 */
+	
 	static void modificarNombreRepres() {
 		System.out.println("\nIntroduce el nuevo nombre:");
 		String nombre = entrada.nextLine();
@@ -119,6 +143,10 @@ public class Ejecucion {
 		managersList.stream().filter(i -> i.getId() == id).forEach(r -> r.setNombre(nombre));
 	}
 
+	/**
+	 * Metodo para modificar la edad del representante elegido
+	 */
+	
 	static void modificarEdadRepres() {
 		System.out.println("\nIntroduce la nueva edad:");
 		int edad = ex.controlInt();
@@ -130,6 +158,10 @@ public class Ejecucion {
 		managersList.stream().filter(i -> i.getId() == id).forEach(r -> r.setEdad(edad));
 	}
 
+	/**
+	 * Metodo para modificar el sueldo del representante elegido
+	 */
+	
 	static void modificarSueldoRepres() {
 		System.out.println("\nIntroduce el nuevo sueldo:");
 		float sueldo = ex.controlFloat();
@@ -140,6 +172,10 @@ public class Ejecucion {
 		 */
 		managersList.stream().filter(i -> i.getId() == id).forEach(r -> r.setSueldo(sueldo));
 	}
+	
+	/**
+	 * Metodo para cambiar el representante del grupo que queremos
+	 */
 
 	static void cambiarRepresentante() {
 		/*
@@ -160,13 +196,13 @@ public class Ejecucion {
 		 * (id == representante.getId()) { if (representante.getGrupo() != null) { if
 		 * (representante.getGrupo().equals(origen.getGrupo())) {
 		 * System.out.println("El grupo '" + origen.getGrupo().getNombre() +
-		 * "' ya está asignado al representante " + representante.getNombre() + " ID: "
+		 * "' ya estÃ¡ asignado al representante " + representante.getNombre() + " ID: "
 		 * + representante.getId()); i++; j++; m++; } else { int key = 0; while (key ==
 		 * 0) { System.out.println(
 		 * "ATENCION. El representante ya tiene un grupo asignado ('" +
 		 * representante.getGrupo().getNombre() +
-		 * "').\nSi lo sustituye perderá toda la informacion del grupo '" +
-		 * representante.getGrupo().getNombre() + "'.\n¿Desea sustituirlo por '" +
+		 * "').\nSi lo sustituye perderÃ¡ toda la informacion del grupo '" +
+		 * representante.getGrupo().getNombre() + "'.\nÂ¿Desea sustituirlo por '" +
 		 * origen.getGrupo().getNombre() + "'?\n1. Si\n2. No"); key = ex.controlInt();
 		 * switch (key) { case 1: System.out.println( "El grupo " +
 		 * origen.getGrupo().getNombre() + " ha sido cambiado al representante " +
@@ -201,15 +237,15 @@ public class Ejecucion {
 					Representante destino = managersList.stream().filter(r -> r.getId() == id).findFirst().get();
 					if (origen.getGrupo() == destino.getGrupo()) {
 						System.out.println(
-								"El grupo '" + origen.getGrupo().getNombre() + "' ya está asignado al representante "
+								"El grupo '" + origen.getGrupo().getNombre() + "' ya estÃ¡ asignado al representante "
 										+ destino.getNombre() + " ID: " + destino.getId());
 					} else if (destino.getGrupo() != null) {
 						int key = 0;
 						while (key == 0) {
 							System.out.println("ATENCION. El representante ya tiene un grupo asignado ('"
 									+ destino.getGrupo().getNombre()
-									+ "').\nSi lo sustituye perderá toda la informacion del grupo '"
-									+ destino.getGrupo().getNombre() + "'.\n¿Desea sustituirlo por '"
+									+ "').\nSi lo sustituye perderÃ¡ toda la informacion del grupo '"
+									+ destino.getGrupo().getNombre() + "'.\nÂ¿Desea sustituirlo por '"
 									+ origen.getGrupo().getNombre() + "'?\n1. Si\n2. No");
 							key = ex.controlInt();
 							switch (key) {
@@ -248,10 +284,14 @@ public class Ejecucion {
 		}
 	}
 
+	/**
+	 * Metodo para introducir un nuevo grupo 
+	 */
+	
 	static void introducirNuevoGrupo() {
 		/*
 		 * int i = 0; if (listaRepresVacia()) { System.out.println(
-		 * "\nNo hay ningún representante en lista. Introduzca un representante primero desde MENU REPRESENTANTES.\n"
+		 * "\nNo hay ningÃºn representante en lista. Introduzca un representante primero desde MENU REPRESENTANTES.\n"
 		 * ); i++; } else { System.out.println("\nIntroduce el nombre del grupo:");
 		 * String nombreGrupo = entrada.nextLine(); group.setNombre(nombreGrupo);
 		 * System.out.println("Introduce el pais del grupo:"); String paisGrupo =
@@ -262,8 +302,8 @@ public class Ejecucion {
 		 * representante.setGrupo(group); i++; } else { int key = 0; while (key == 0) {
 		 * System.out.println("ATENCION. El representante ya tiene un grupo asignado ('"
 		 * + representante.getGrupo().getNombre() +
-		 * "')\nSi lo sustituye perderá toda la informacion del grupo '" +
-		 * representante.getGrupo().getNombre() + "'.\n¿Desea sustituirlo por '" +
+		 * "')\nSi lo sustituye perderÃ¡ toda la informacion del grupo '" +
+		 * representante.getGrupo().getNombre() + "'.\nÂ¿Desea sustituirlo por '" +
 		 * group.getNombre() + "'?\n1. Si\n2. No"); key = ex.controlInt(); switch (key)
 		 * { case 1: representante.setGrupo(group); i++; break; case 2:
 		 * System.out.println("Cancelando operacion..."); i++; break; default:
@@ -275,7 +315,7 @@ public class Ejecucion {
 
 		if (listaRepresVacia()) {
 			System.out.println(
-					"\nNo hay ningún representante en lista. Introduzca un representante primero desde MENU REPRESENTANTES.\n");
+					"\nNo hay ningÃºn representante en lista. Introduzca un representante primero desde MENU REPRESENTANTES.\n");
 		} else {
 			Grupo tempGroup = new Grupo();
 			System.out.println("\nIntroduce el nombre del grupo:");
@@ -301,8 +341,8 @@ public class Ejecucion {
 							while (key == 0) {
 								System.out.println("ATENCION. El representante ya tiene un grupo asignado ('"
 										+ destino.getGrupo().getNombre()
-										+ "')\nSi lo sustituye perderá toda la informacion del grupo '"
-										+ destino.getGrupo().getNombre() + "'.\n¿Desea sustituirlo por '"
+										+ "')\nSi lo sustituye perderÃ¡ toda la informacion del grupo '"
+										+ destino.getGrupo().getNombre() + "'.\nÂ¿Desea sustituirlo por '"
 										+ tempGroup.getNombre() + "'?\n1. Si\n2. No");
 								key = ex.controlInt();
 								switch (key) {
@@ -330,6 +370,10 @@ public class Ejecucion {
 		}
 	}
 
+	/**
+	 * Metodo para listar los grupos
+	 */
+	
 	static void listarGrupos() {
 		if (listaGruposVacia()) {
 			System.out.println("\nLa lista de grupos representados esta vacia.\n");
@@ -343,11 +387,21 @@ public class Ejecucion {
 			}
 		}
 	}
+	
+
+	/**
+	 * Metodo que devuelve si la lista de representantes esta vacia
+	 * @return true o false
+	 */
 
 	static boolean listaRepresVacia() {
 		return (managersList.isEmpty());
 	}
 
+	/**
+	 * Metodo que devuelve si la lista de grupos esta vacia.
+	 * @return true en caso de estarlo, false si no lo esta.
+	 */
 	static boolean listaGruposVacia() {
 		/*
 		 * boolean vacia = false; int i = 0;
@@ -365,6 +419,11 @@ public class Ejecucion {
 		// return vacia;
 	}
 
+	/**
+	 * Metodo que devuelve si la lista de cds esta vacia
+	 * @return true en caso de estarlo, false si no lo esta.
+	 */
+	
 	static boolean listaCdVacia() {
 		/*
 		 * boolean vacia = false; int i = 0;
@@ -385,10 +444,14 @@ public class Ejecucion {
 		}
 	}
 
+	/**
+	 * Metodo para eliminar un grupo
+	 */
+	
 	static void eliminarGrupo() {
 		/*
 		 * int i = 0; Representante temp = null; if (listaGruposVacia()) {
-		 * System.out.println("\nLa lista de grupos representados está vacía.\n"); }
+		 * System.out.println("\nLa lista de grupos representados estÃ¡ vacÃ­a.\n"); }
 		 * else {
 		 * System.out.println("\nIntroduce el nombre del grupo que quieres eliminar:");
 		 * String nombreGrupo = entrada.nextLine(); for (Representante representante :
@@ -401,11 +464,15 @@ public class Ejecucion {
 		 * ); listarGrupos(); } }
 		 */
 		if (listaGruposVacia()) {
-			System.out.println("\nLa lista de grupos representados está vacía.\n");
+			System.out.println("\nLa lista de grupos representados estÃ¡ vacÃ­a.\n");
 		} else {
 
 		}
 	}
+	
+	/**
+	 * Metodo para modificar el nombre del grupo elegido
+	 */
 
 	static void modificarNombreGrupo() {
 		System.out.println("\nIntroduce el nuevo nombre:");
@@ -425,6 +492,10 @@ public class Ejecucion {
 		}
 	}
 
+	/**
+	 * Metodo para modificar el pais del del grupo
+	 */
+	
 	static void modificarPaisGrupo() {
 		System.out.println("\nIntroduce el nuevo pais:");
 		String pais = entrada.nextLine();
@@ -437,6 +508,10 @@ public class Ejecucion {
 		System.out.println("El pais se ha cambiado.");
 	}
 
+	/**
+	 * Metodo para introducir Cds de un grupo
+	 */
+	
 	static void introducirCd() {
 		System.out.println("\nIntroduce el nombre del CD:");
 		String nombre = entrada.nextLine();
@@ -457,6 +532,10 @@ public class Ejecucion {
 			System.out.println("Ya existe un CD en la lista con ese nombre.");
 		}
 	}
+	
+	/**
+	 * Metodo para listar la discografia, puede hacerlo por orden alfabetico o por fecha de lanzamiento.
+	 */
 
 	static void listarDiscografia() {
 		if (listaCdVacia()) {
@@ -465,7 +544,7 @@ public class Ejecucion {
 			int key = 0;
 			while (key == 0) {
 				System.out.println(
-						"¿Como quiere mostrar la discografia?\n1. Por fecha de lanzamiento.\n2. Por orden alfabético");
+						"Â¿Como quiere mostrar la discografia?\n1. Por fecha de lanzamiento.\n2. Por orden alfabÃ©tico");
 				key = ex.controlInt();
 				switch (key) {
 				case 1:
@@ -473,7 +552,7 @@ public class Ejecucion {
 					 * for (Representante representante : managersList) { if (id ==
 					 * representante.getId()) { representante.getGrupo().mostrarDiscografia(); } }
 					 */
-					System.out.println("\nDiscografía de "+managersList.stream().filter(r -> r.getId() == id).findAny().get().getGrupo().getNombre()+"\n");
+					System.out.println("\nDiscografÃ­a de "+managersList.stream().filter(r -> r.getId() == id).findAny().get().getGrupo().getNombre()+"\n");
 					managersList.stream().filter(r -> r.getId() == id).forEach(r -> r.getGrupo().mostrarDiscografia());
 					break;
 				case 2:
@@ -482,7 +561,7 @@ public class Ejecucion {
 					 * representante.getId()) {
 					 * representante.getGrupo().mostrarDiscografiaAlfabetica(); ; } }
 					 */
-					System.out.println("\nDiscografía de "+managersList.stream().filter(r -> r.getId() == id).findAny().get().getGrupo().getNombre()+"");
+					System.out.println("\nDiscografÃ­a de "+managersList.stream().filter(r -> r.getId() == id).findAny().get().getGrupo().getNombre()+"");
 					managersList.stream().filter(r -> r.getId() == id)
 							.forEach(r -> r.getGrupo().mostrarDiscografiaAlfabetica());
 					break;
@@ -495,6 +574,11 @@ public class Ejecucion {
 		}
 	}
 
+	/**
+	 * Metodo para modificar el nombre del cd elegido.
+	 * @param nombre El nombre del cd que queremos cambiar.
+	 */
+	
 	static void modificarNombreCd(String nombre) {
 		System.out.println("\nIntroduce el nombre nuevo del CD:");
 		String nuevoNombre = entrada.nextLine();
@@ -511,6 +595,11 @@ public class Ejecucion {
 			System.out.println("Ya existe un CD en la lista con ese nombre.");
 		}
 	}
+	
+	/**
+	 * Metodo para modificar la fecha del cd
+	 * @param nombre El nombre del cd al que le queremos cambiar la fecha
+	 */
 
 	static void modificarFechaCd(String nombre) {
 		
@@ -530,6 +619,10 @@ public class Ejecucion {
 		}
 	}
 
+	/**
+	 * Metodo que muestra un menu que nos dara a elegir que queremos modificar del cd
+	 */
+	
 	static void menuModificarCD() {
 		if (listaCdVacia()) {
 			System.out.println("La lista de CDs esta vacia.");
@@ -545,7 +638,7 @@ public class Ejecucion {
 				int key = 0;
 				do {
 					System.out.println("\nMENU MODIFICAR CD");
-					System.out.println("Elija una opción:");
+					System.out.println("Elija una opciÃ³n:");
 					System.out.println("1. Modificar nombre.");
 					System.out.println("2. Modificar fecha.");
 					System.out.println("0. Volver al menu anterior.");
@@ -578,6 +671,11 @@ public class Ejecucion {
 		}
 	}
 
+	/**
+	 * Metodo para eliminar un cd
+	 */
+	
+	
 	static void eliminarCD() {
 		if (listaCdVacia()) {
 			System.out.println("La lista de CDs esta vacia.");
@@ -592,6 +690,10 @@ public class Ejecucion {
 			managersList.stream().filter(r -> r.getId() == id).forEach(r -> r.getGrupo().eliminarCd(nombre));
 		}
 	}
+	
+	/**
+	 * Metodo que muestra un menu que nos dara a elegir que queremos hacer con la discografia
+	 */
 
 	static void menuDiscografia() {
 		int key = 0;
@@ -628,6 +730,10 @@ public class Ejecucion {
 		} while (key != 0);
 	}
 
+	/**
+	 * Metodo que muestra un menu que nos dara a elegir que queremos modificar del grupo
+	 */
+	
 	static void menuModificarGrupo() {
 		int i = 0;
 		Representante temp = null;
@@ -650,7 +756,7 @@ public class Ejecucion {
 					int key = 0;
 					do {
 						System.out.println("\nMENU MODIFICAR GRUPO");
-						System.out.println("Elija una opción:");
+						System.out.println("Elija una opciÃ³n:");
 						System.out.println("1. Modificar nombre del grupo.");
 						System.out.println("2. Modificar pais del grupo.");
 						System.out.println("3. Ir a MENU DISCOGRAFIA.");
@@ -696,6 +802,10 @@ public class Ejecucion {
 			} while (i == 0);
 		}
 	}
+	
+	/**
+	 * Metodo que muestra un menu que nos dara a elegir que queremos modificar del representante.
+	 */
 
 	static void menuModificarRepres() {
 		int i = 0;
@@ -717,7 +827,7 @@ public class Ejecucion {
 					int key = 0;
 					do {
 						System.out.println("\nMENU MODIFICAR REPRESENTANTE");
-						System.out.println("Elija una opción:");
+						System.out.println("Elija una opciÃ³n:");
 						System.out.println("1. Modificar nombre.");
 						System.out.println("2. Modificar edad.");
 						System.out.println("3. Modificar sueldo.");
@@ -753,6 +863,10 @@ public class Ejecucion {
 		}
 	}
 
+	/**
+	 * Metodo que muestra un menu que nos dara a elegir que queremos hacer con el representante
+	 */
+	
 	static void menuRepres() {
 		int key = 0;
 		do {
@@ -767,7 +881,7 @@ public class Ejecucion {
 			key = ex.controlInt();
 			switch (key) {
 			case 1:
-				añadirRepres();
+				aÃ±adirRepres();
 				break;
 			case 2:
 				listarRepres();
@@ -788,6 +902,10 @@ public class Ejecucion {
 		} while (key != 0);
 	}
 
+	/**
+	 * Metodo que muestra un menu en el que podremos seleccionar que hacer con los grupos
+	 */
+	
 	static void menuGrupos() {
 		int key = 0;
 		do {
@@ -827,6 +945,10 @@ public class Ejecucion {
 		} while (key != 0);
 	}
 
+	/**
+	 * Metodo que muestra un primer menu en el que podemos seleccionar a que menu queremos ir.
+	 */
+	
 	static void menuPrincipal() {
 		int key = 0;
 		do {
